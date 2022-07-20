@@ -1,7 +1,7 @@
 name : Indonesia
 
 # String Umum
-general_1 : "Balas pesan pengguna atau berikan nama pengguna/id_pengguna."
+general_1 : "📌 **Hay kamu silahkan beri username/id_pengguna untuk meng-gban**\n\n**Contoh:** /gban @sikontol"
 general_2 : "Kesalahan! Penggunaan Perintah Salah."
 general_3 : "Beberapa **pengecualian terjadi** saat memproses kueri Anda.\n\nJenis Pengecualian:- {0}"
 general_4 : "Anda adalah admin anonim di grup obrolan ini!\nKembali kembali ke Akun Pengguna Dari Hak Admin."
