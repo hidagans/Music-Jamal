@@ -31,6 +31,9 @@ from CilikMusic.misc import SUDOERS
 async def aexec(code, client, message):
     exec(
         "async def __aexec(client, message): "
+        + "\n c = cilik = client"
+        + "\n m = message"
+        + "\n r = message.reply_to_message"
         + "".join(f"\n {a}" for a in code.split("\n"))
     )
     return await locals()["__aexec"](client, message)
@@ -41,9 +44,10 @@ async def edit_or_reply(msg: Message, **kwargs):
     spec = getfullargspec(func.__wrapped__).args
     await func(**{k: v for k, v in kwargs.items() if k in spec})
 
+p = print
 
 @app.on_message(
-    filters.command("xx")
+    filters.command(["e", "ev"], ["(", "[", "="])
     & SUDOERS
     & ~filters.forwarded
     & ~filters.via_bot
@@ -51,7 +55,7 @@ async def edit_or_reply(msg: Message, **kwargs):
 async def executor(client, message):
     if len(message.command) < 2:
         return await edit_or_reply(
-            message, text="__Nigga Give me some command to execute.__"
+            message, text="__What Command ?__"
         )
     try:
         cmd = message.text.split(" ", maxsplit=1)[1]
