@@ -42,9 +42,6 @@ async def gbanuser(client, message: Message, _):
         user = await app.get_users(user)
         user_id = user.id
         mention = user.mention
-        reason = message.command[1]
-        spam_text = ' '.join(message.command[2:]) 
-        reason = str(reason)
     else:
         user_id = message.reply_to_message.from_user.id
         mention = message.reply_to_message.from_user.mention
@@ -71,7 +68,7 @@ async def gbanuser(client, message: Message, _):
     number_of_chats = 0
     for chat_id in served_chats:
         try:
-            await app.ban_chat_member(chat_id, user_id, reason)
+            await app.ban_chat_member(chat_id, user_id)
             number_of_chats += 1
         except FloodWait as e:
             await asyncio.sleep(int(e.x))
@@ -79,7 +76,7 @@ async def gbanuser(client, message: Message, _):
             pass
     await add_banned_user(user_id)
     await message.reply_text(
-        _["gban_6"].format(mention, number_of_chats, reason)
+        _["gban_6"].format(mention, number_of_chats)
     )
     await mystic.delete()
 
