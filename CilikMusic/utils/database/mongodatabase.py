@@ -23,7 +23,7 @@ usersdb = mongodb.tgusersdb
 playlistdb = mongodb.playlist
 blockeddb = mongodb.blockedusers
 privatedb = mongodb.privatechats
-
+gruplist = mongodb.gruplist
 
 # Playlist
 
@@ -438,3 +438,33 @@ async def remove_banned_user(user_id: int):
     if not is_gbanned:
         return
     return await blockeddb.delete_one({"user_id": user_id})
+
+
+# GroupList
+
+async def get_gruplist() -> list:
+    gruplist = []
+    async for chat in gruplistdb.find({"chat_id": {"$lt": 0}}):
+        gruplist.append(chat)
+    return gruplist
+
+
+async def is_gruplist(chat_id: int) -> bool:
+    chat = await gruplistdb.find_one({"chat_id": chat_id})
+    if not chat:
+        return False
+    return True
+
+
+async def add_gruplist(chat_id: int):
+    is_served = await is_gruplist(chat_id)
+    if is_served:
+        return
+    return await gruplistdb.insert_one({"chat_id": chat_id})
+
+
+async def remove_gruplist(chat_id: int):
+    is_served = await is_gruplist(chat_id)
+    if not is_served:
+        return
+    return await gruplistdb.delete_one({"chat_id": chat_id})
