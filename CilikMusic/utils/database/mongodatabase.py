@@ -440,31 +440,29 @@ async def remove_banned_user(user_id: int):
     return await blockeddb.delete_one({"user_id": user_id})
 
 
-# GroupList
+# GrupList
+
 
 async def get_gruplist() -> list:
-    gruplist = []
-    async for chat in gruplistdb.find({"chat_id": {"$lt": 0}}):
-        gruplist.append(chat)
-    return gruplist
+    gruplist = await gruplistdb.find_one({"grup": "grup"})
+    if not gruplist:
+        return []
+    return gruplist["gruplist"]
 
 
-async def is_gruplist(chat_id: int) -> bool:
-    chat = await gruplistdb.find_one({"chat_id": chat_id})
-    if not chat:
-        return False
+async def add_gruplist(chat_id: int) -> bool:
+    gruplist = await get_gruplist()
+    gruplist.append(chat_id)
+    await gruplistdb.update_one(
+        {"grup": "grup"}, {"$set": {"gruplist": gruplist}}, upsert=True
+    )
     return True
 
 
-async def add_gruplist(chat_id: int):
-    is_served = await is_gruplist(chat_id)
-    if is_served:
-        return
-    return await gruplistdb.insert_one({"chat_id": chat_id})
-
-
-async def remove_gruplist(chat_id: int):
-    is_served = await is_gruplist(chat_id)
-    if not is_served:
-        return
-    return await gruplistdb.delete_one({"chat_id": chat_id})
+async def remove_gruplist(chat_id: int) -> bool:
+    gruplist = await get_gruplist()
+    gruplist.remove(chat_id)
+    await gruplistdb.update_one(
+        {"grup": "grup"}, {"$set": {"gruplist": gruplist}}, upsert=True
+    )
+    return True
