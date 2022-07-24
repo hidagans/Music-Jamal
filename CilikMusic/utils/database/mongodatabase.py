@@ -23,7 +23,7 @@ usersdb = mongodb.tgusersdb
 playlistdb = mongodb.playlist
 blockeddb = mongodb.blockedusers
 privatedb = mongodb.privatechats
-gruplist = mongodb.gruplist
+gruplist_db = mongodb.gruplist
 
 # Playlist
 
@@ -440,29 +440,25 @@ async def remove_banned_user(user_id: int):
     return await blockeddb.delete_one({"user_id": user_id})
 
 
-# GrupList
+# Gruplist Database
 
 
-async def get_gruplist() -> list:
-    gruplist = await gruplistdb.find_one({"grup": "grup"})
-    if not gruplist:
-        return []
-    return gruplist["gruplist"]
+async def gruplist_db() -> list:
+    grup_list = []
+    async for chat in gruplist_db.find({"chat_id": {"$lt": 0}}):
+        grup_list.append(chat["chat_id"])
+    return grup_list
 
 
 async def add_gruplist(chat_id: int) -> bool:
-    gruplist = await get_gruplist()
-    gruplist.append(chat_id)
-    await gruplistdb.update_one(
-        {"grup": "grup"}, {"$set": {"gruplist": gruplist}}, upsert=True
-    )
-    return True
+    if not await gruplist_db.find_one({"chat_id": chat_id}):
+        await gruplist_db.insert_one({"chat_id": chat_id})
+        return True
+    return False
 
 
 async def remove_gruplist(chat_id: int) -> bool:
-    gruplist = await get_gruplist()
-    gruplist.remove(chat_id)
-    await gruplistdb.update_one(
-        {"grup": "grup"}, {"$set": {"gruplist": gruplist}}, upsert=True
-    )
-    return True
+    if await gruplist_db.find_one({"chat_id": chat_id}):
+        await gruplist_db.delete_one({"chat_id": chat_id})
+        return True
+    return False
