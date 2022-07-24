@@ -17,7 +17,7 @@ from CilikMusic.utils.database import (gruplist_db,
                                        remove_gruplist)
 
 
-@app.on_message(filters.command("addgc", [".", "/"]) & filters.user(OWNER_ID)
+@app.on_message(filters.command("addgc", [".", "/"]) & filters.user(OWNER_ID))
 async def add_gruplist_func(client, message: Message):
     if len(message.command) != 2:
         return await message.reply_text("**Penggunaan:**\n/addgc [CHAT_ID]")
@@ -27,13 +27,11 @@ async def add_gruplist_func(client, message: Message):
     gruplisted = await add_gruplist(chat_id)
     if gruplisted:
         await message.reply_text("✅ **Succes**\nGrup ini berhasil bergabung di **Jamal Project**")
-    try:
-        await app.send_message(message.chat.id, "Done")
-    except:
-        pass
+    else:
+        await message.reply_text("Sesuatu yang salah terjadi.")
            
                 
-@app.on_message(filters.command("removegc", [".", "/"]) & filters.user(OWNER_ID)
+@app.on_message(filters.command("removegc", [".", "/"]) & filters.user(OWNER_ID))
 async def remove_gruplist_func(client, message: Message):
     if len(message.command) != 2:
         return await message.reply_text("**Penggunaan:**\nremovegc/ [CHAT_ID]")
@@ -46,7 +44,7 @@ async def remove_gruplist_func(client, message: Message):
     await message.reply_text("Sesuatu yang salah terjadi.")
 
 
-@app.on_message(filters.command("gruplist", [".", "/"]) & filters.user(OWNER_ID)
+@app.on_message(filters.command("gruplist", [".", "/"]) & filters.user(OWNER_ID))
 async def allgruplist(client, message: Message):
     text = "**Grup Yang Bergabung di Jamal Project:**\n\n"
     j = 0
