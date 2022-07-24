@@ -18,7 +18,7 @@ from CilikMusic.utils.database import (gruplist_db,
 
 
 @app.on_message(filters.command("addgc", [".", "/"]) & filters.user(OWNER_ID)
-async def add_gruplist(client, message: Message):
+async def addgruplist(client, message: Message):
     if len(message.command) != 2:
         return await message.reply_text("**Penggunaan:**\n/addgc [CHAT_ID]")
     chat_id = int(message.text.strip().split()[1])
@@ -32,7 +32,7 @@ async def add_gruplist(client, message: Message):
 
                 
 @app.on_message(filters.command("removegc", [".", "/"]) & filters.user(OWNER_ID)
-async def remove_gruplist(client, message: Message):
+async def removegruplist(client, message: Message):
     if len(message.command) != 2:
         return await message.reply_text("**Penggunaan:**\nremovegc/ [CHAT_ID]")
     chat_id = int(message.text.strip().split()[1])
@@ -45,7 +45,7 @@ async def remove_gruplist(client, message: Message):
 
 
 @app.on_message(filters.command("gruplist", [".", "/"]) & filters.user(OWNER_ID)
-async def all_gruplist(client, message: Message):
+async def allgruplist(client, message: Message):
     text = "**Grup Yang Bergabung di Jamal Project:**\n\n"
     j = 0
     for count, chat_id in enumerate(await gruplist_db(), 1):
