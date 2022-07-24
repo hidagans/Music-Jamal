@@ -27,10 +27,12 @@ async def add_gruplist_func(client, message: Message):
     gruplisted = await add_gruplist(chat_id)
     if gruplisted:
         await message.reply_text("✅ **Succes**\nGrup ini berhasil bergabung di **Jamal Project**")
-    else:
-        await message.reply_text("Sesuatu yang salah terjadi.")
+    try:
+        await app.send_message(message.chat.id, "Done")
+    except:
         pass
-              
+           
+                
 @app.on_message(filters.command("removegc", [".", "/"]) & filters.user(OWNER_ID)
 async def remove_gruplist_func(client, message: Message):
     if len(message.command) != 2:
