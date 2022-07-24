@@ -22,7 +22,7 @@ async def add_gruplist_func(client, message: Message):
     if len(message.command) != 2:
         return await message.reply_text("**Penggunaan:**\n/addgc [CHAT_ID]")
     chat_id = int(message.text.strip().split()[1])
-    if chat_id in await add_gruplist():
+    if chat_id in await gruplist_db():
         return await message.reply_text("Grup ini sudah gabung di **Jamal Project**")
     gruplisted = await add_gruplist(chat_id)
     if gruplisted:
@@ -52,7 +52,7 @@ async def allgruplist(client, message: Message):
         try:
             title = (await app.get_chat(chat_id)).title
         except Exception:
-            title = "Private"
+            title = message.chat.title
         j = 1
         text += f"**{count}. {title}** [`{chat_id}`]\n"
     if j == 0:
