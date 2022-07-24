@@ -11,7 +11,7 @@ from pyrogram import filters
 from pyrogram.types import Message
 
 from CilikMusic import app
-from CilikMusic.misc import OWNER_ID
+fron config import OWNER_ID
 from CilikMusic.utils.database import (gruplist_db,
                                        add_gruplist,
                                        remove_gruplist)
