@@ -29,8 +29,8 @@ async def addgruplist(client, message: Message):
         await message.reply_text("✅ **Succes**\nGrup ini berhasil bergabung di **Jamal Project**")
     else:
         await message.reply_text("Sesuatu yang salah terjadi.")
-
-                
+    pass
+              
 @app.on_message(filters.command("removegc", [".", "/"]) & filters.user(OWNER_ID)
 async def removegruplist(client, message: Message):
     if len(message.command) != 2:
