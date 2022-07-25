@@ -22,10 +22,10 @@ async def add_gruplist_func(client, message: Message):
     if len(message.command) != 2:
         return await message.reply_text("**Penggunaan:**\n/addgc [CHAT_ID]")
     chat_id = int(message.text.strip().split()[1])
-    if chat_id in await gruplist_db():
+    if chat_id in await gruplisted():
         return await message.reply_text("Grup ini sudah gabung di **Jamal Project**")
-    gruplisted = await add_gruplist(chat_id)
-    if gruplisted:
+    gruplisted_chats = await add_gruplist(chat_id)
+    if gruplisted_chats:
         await message.reply_text("✅ **Succes**\nGrup ini berhasil bergabung di **Jamal Project**")
     else:
         await message.reply_text("Sesuatu yang salah terjadi.")
