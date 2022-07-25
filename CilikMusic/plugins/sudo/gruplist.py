@@ -12,7 +12,7 @@ from pyrogram.types import Message
 
 from CilikMusic import app
 from config import OWNER_ID
-from CilikMusic.utils.database import (gruplist_db,
+from CilikMusic.utils.database import (gruplisted,
                                        add_gruplist,
                                        remove_gruplist)
 
