@@ -443,7 +443,7 @@ async def remove_banned_user(user_id: int):
 # Gruplist Database
 
 
-async def gruplist_db() -> list:
+async def gruplisted() -> list:
     grup_list = []
     async for chat in gruplist_db.find({"chat_id": {"$lt": 0}}):
         grup_list.append(chat["chat_id"])
