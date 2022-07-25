@@ -36,7 +36,7 @@ async def remove_gruplist_func(client, message: Message):
     if len(message.command) != 2:
         return await message.reply_text("**Penggunaan:**\nremovegc/ [CHAT_ID]")
     chat_id = int(message.text.strip().split()[1])
-    if chat_id not in await add_gruplist():
+    if chat_id not in await gruplisted():
         return await message.reply_text("Grup ini sudah keluar dari **Jamal Project**")
     nogruplisted = await remove_gruplist(chat_id)
     if nogruplisted:
@@ -48,7 +48,7 @@ async def remove_gruplist_func(client, message: Message):
 async def allgruplist(client, message: Message):
     text = "**Grup Yang Bergabung di Jamal Project:**\n\n"
     j = 0
-    for count, chat_id in enumerate(await gruplist_db(), 1):
+    for count, chat_id in enumerate(await gruplisted(), 1):
         try:
             title = (await app.get_chat(chat_id)).title
         except Exception:
