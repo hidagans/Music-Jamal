@@ -437,7 +437,7 @@ gban_5 : "**Initializing Gobal Ban on {0}**\n\nExpected Time : {1}."
 gban_6 : "**Gbanned Successfully**\n\nBanned **{0}** from **{1}** chats\nGbanned by: **{2}**"
 gban_7 : "{0} is not **gbanned **yet from the bot."
 gban_8 : "**Ungbanning {0}**\n\nExpected Time : {1}."
-gban_9 : "**UnGbanned Successfully**\n\nUnbanned **{0}** in **{1}** chats."
+gban_9 : "**UnGbanned Successfully**\n\nUnbanned **{0}** in **{1}** chats\nUngbanned by: **{2}**"
 gban_10 : "No Gbanned Users Found."
 gban_11 : "Please wait a while.. Fetching Gbanned users list"
 
