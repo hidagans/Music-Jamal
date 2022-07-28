@@ -76,7 +76,7 @@ async def gbanuser(client, message: Message, _):
             pass
     await add_banned_user(user_id)
     await message.reply_text(
-        _["gban_6"].format(mention, number_of_chats)
+        _["gban_6"].format(mention, number_of_chats, message.from_user.mention)
     )
     await mystic.delete()
 
@@ -119,7 +119,7 @@ async def gungabn(client, message: Message, _):
             pass
     await remove_banned_user(user_id)
     await message.reply_text(
-        _["gban_9"].format(mention, number_of_chats)
+        _["gban_9"].format(mention, number_of_chats, message.from_user.mention)
     )
     await mystic.delete()
 
