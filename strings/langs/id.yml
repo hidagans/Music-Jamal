@@ -437,7 +437,7 @@ gban_5 : "**⏳ Global Ban sedang di proses {0}**\n\nWaktu yang DiPerlukan : {1}
 gban_6 : "**✅ Berhasil Dibanned**\n\nUser:  **{0}** \nTerbanned di: **{1}** Grup\nDi-Gban Oleh: **{2}**"
 gban_7 : "{0} belum **gbanned **belum dari bot."
 gban_8 : "**Membatalkan pemblokiran {0}**\n\nWaktu yang Diharapkan : {1}."
-gban_9 : "**✅ UnGbanned Berhasil**\n\nUser: **{0}** di **{1}** Grup."
+gban_9 : "**✅ UnGbanned Berhasil**\n\nUser: **{0}** di **{1}** Grup\nDi-Ungban Oleh: **{2}**"
 gban_10 : "Tidak Ditemukan Pengguna yang Di-Gban."
 gban_11 : "Harap tunggu sebentar.. Mengambil daftar pengguna Gbanned"
 
